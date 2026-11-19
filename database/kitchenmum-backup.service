@@ -1,0 +1,8 @@
+[Unit]
+Description=Create a private KitchenMum PostgreSQL backup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/kitchenmum/database/backup.sh

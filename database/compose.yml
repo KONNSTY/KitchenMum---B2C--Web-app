@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:17.12-alpine
+    container_name: kitchenmum-postgres
+    restart: unless-stopped
+    shm_size: 256mb
+    environment:
+      POSTGRES_DB: kitchenmum
+      POSTGRES_USER: km_db_admin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in database/.env}
+      KM_APP_PASSWORD: ${KM_APP_PASSWORD:?Set KM_APP_PASSWORD in database/.env}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - kitchenmum_postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - kitchenmum_data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U km_db_admin -d kitchenmum"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+
+volumes:
+  kitchenmum_postgres_data:
+    name: kitchenmum_postgres_data
+
+networks:
+  kitchenmum_data:
+    name: kitchenmum_data
+    internal: true
+    driver: bridge

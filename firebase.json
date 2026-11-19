@@ -1,0 +1,18 @@
+{
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "KitchenMum",
+        "supportEmail": "info@reglerproductions.com",
+        "authorizedRedirectUris": ["https://kitchenmum-app.firebaseapp.com/__/auth/handler", "http://localhost"]
+      }
+    }
+  },
+  "firestore": {
+    "database": "(default)",
+    "location": "europe-west3",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

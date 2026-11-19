@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    container_name: kitchenmum-api
+    restart: unless-stopped
+    environment:
+      FIREBASE_PROJECT_ID: kitchenmum-app
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL}
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - kitchenmum_data
+      - kitchenmum_api_outbound
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/live', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+networks:
+  kitchenmum_data:
+    external: true
+  kitchenmum_api_outbound:
+    driver: bridge
