@@ -1,0 +1,49 @@
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+.env*
+!.env.example
+
+# Local credentials and secret files (keep sanitized examples as *.example)
+.secrets/
+secrets/
+**/credentials/
+**/*credentials*.json
+**/*secret*.json
+**/*secrets*.json
+**/service-account*.json
+**/*service-account*.json
+**/firebase-adminsdk*.json
+**/application_default_credentials.json
+**/azureProfile.json
+**/.aws/credentials
+**/.config/gcloud/application_default_credentials.json
+**/.docker/config.json
+.npmrc
+!.npmrc.example
+.pypirc
+
+# Private keys and exported keystores. Public certs/keys can be explicitly
+# re-included with a more specific ! rule when they are intentionally public.
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ed25519
+id_ecdsa
+id_dsa
+
+# Local infrastructure secrets, state and logs
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.log
+.DS_Store
